@@ -1,11 +1,32 @@
+"""
+    Title: Library Management System
+    Author:Ashish Kore
+    Language: Python
+    Requirements:
+    Python version-> 3 or later
+    Python Packages or Modules->    1. datetime
+                                    2. pickle
+    Additional Modules->      1. student.py
+                              2. faculty.py
+                              3. book.py
+"""
+
+#importing required necessary modules and packages
 from student import Student
 from faculty import Faculty
+from book import Book
 from datetime import date
 import pickle
+
+#initializing some global variables
 count_s=0
 count_f=0
 l=[]
+
 def add_student():
+"""
+This Function add a new student to the system (into pickle file)
+"""
     global count_s
     
     print(count_s)
@@ -53,6 +74,9 @@ def add_student():
     
     
 def check_student(r_no):
+"""
+This Function checks whether a student is already in the system 
+"""
     with open("student_record.pkl","rb") as f:
         obj=pickle.load(f)
         i=0
@@ -64,8 +88,11 @@ def check_student(r_no):
             except (EOFError,IndexError):
                 return False
     
-import pickle
+
 def print_srecord():
+"""
+This Function prints the student record stored in the system
+"""
     with open("student_record.pkl","rb") as f:
             obj=pickle.load(f)
             i=0
@@ -82,11 +109,14 @@ def print_srecord():
                     break
 
 
-from faculty import Faculty
-import pickle
+
 count_f=0
 l2=[]
+
 def add_faculty():
+"""
+This Function add a new faculty to the system (into pickle file)
+"""
     global count_f
     count_f+=1
     print(count_f)
@@ -116,8 +146,11 @@ def add_faculty():
     
     
     
-import pickle
+
 def check_faculty(fac_id):
+"""
+This Function checks whether a faculty is already registered in the system 
+"""
     with open("faculty_record.pkl","rb") as f:
         obj=pickle.load(f)
         i=0
@@ -129,8 +162,11 @@ def check_faculty(fac_id):
             except (EOFError,IndexError):
                 return False
 
-import pickle
+
 def print_frecord():
+"""
+This Function prints faculty records from the system 
+"""
     with open("faculty_record.pkl","rb") as f:
             obj=pickle.load(f)
             i=0
@@ -144,11 +180,15 @@ def print_frecord():
                     print("end")
                     break
 
-from book import Book
-import pickle
+
+
 count_b=0
 l3=[]
+
 def add_book():
+"""
+This Function adds new book to the system 
+"""
     global count_b
     title=input("Enter the Title:")
     author=input("Enter Author name:")
@@ -185,6 +225,9 @@ def add_book():
             count_b+=1
         
 def check_book(isbn):
+"""
+This Function checks whether a book already exists in the system 
+"""
     with open("book_record.pkl","rb") as f:
         obj=pickle.load(f)
         i=0
@@ -196,8 +239,11 @@ def check_book(isbn):
             except :
                 return False
     
-import pickle
+
 def print_brecord():
+"""
+This Function prints the book record present in the system 
+"""
     with open("book_record.pkl","rb") as f:
             obj=pickle.load(f)
             i=0
@@ -212,6 +258,9 @@ def print_brecord():
 
 
 def issue_fac():
+"""
+This Function issues a book to a registered faculty 
+"""
     fac_id=input("Enter the id:")
     with open("faculty_record.pkl","rb") as f:
         obj=pickle.load(f)
@@ -238,6 +287,9 @@ def issue_fac():
                 break
 
 def modify_book_issue(isbn,copies):
+"""
+This Function modifies he book record
+"""
     with open("book_record.pkl","rb") as f:
         obj=pickle.load(f)
         i=0
@@ -250,12 +302,12 @@ def modify_book_issue(isbn,copies):
                     break
                 i+=1
             except :
-                pass#break
-       
-                            
-                            
+                pass#break              
                         
 def modify_fac(i,isbn,no_co):
+"""
+This Function modifies faculty record for issued and returned books.
+"""
     with open("faculty_record.pkl","rb") as f:
         obj=pickle.load(f)
         obj[i].book_issued[isbn]=int(no_co)
@@ -264,6 +316,9 @@ def modify_fac(i,isbn,no_co):
             pickle.dump(obj,f)
                 
 def check_avail_book(isbn,no_co):
+"""
+This Function checks whether a book is available or not. 
+"""
     with open("book_record.pkl","rb") as f:
         obj=pickle.load(f)
         i=0
@@ -400,8 +455,7 @@ def already_have_fac(isbn,fac_id):
             except (EOFError,IndexError):
                 return False
             
-#from datetime import date
-import datetime
+
 def issue_book_student():
     rollno=input("Enter the roll number:")
     if check_student(rollno):
@@ -420,6 +474,7 @@ def issue_book_student():
             print("Student has reached the book limit.Cannot issue the book")
     else:
         print("Student not found!! Cannot issue book")
+        
 def modify_student_issue(rollno,isbn,l):
     with open("student_record.pkl","rb") as f:
         obj=pickle.load(f)
@@ -434,6 +489,7 @@ def modify_student_issue(rollno,isbn,l):
                 i+=1
             except:
                 break
+                
 def modify_book_issue(isbn,copies):
     with open("book_record.pkl","rb") as f:
         obj=pickle.load(f)
@@ -489,6 +545,9 @@ def already_have(isbn,rollno):
                 return False
 
 def return_book_student():
+"""
+This Function accepts the book returning request of student and checks whether the student have that book or not
+"""
     rollno=input("Enter the rollno of the student:")
     if check_student(rollno):
         isbn=input("Enter isbn:")
@@ -502,6 +561,9 @@ def return_book_student():
     
 
 def modify_student_return(rollno,isbn):
+"""
+This Function modifies the student record for returned books.
+"""
     with open("student_record.pkl","rb") as f:
         obj=pickle.load(f)
         i=0
@@ -516,6 +578,9 @@ def modify_student_return(rollno,isbn):
             except:
                 break
 def modify_book_return(isbn,copies):
+"""
+This Function modifies the book record for any returned book.
+"""
     with open("book_record.pkl","rb") as f:
         obj=pickle.load(f)
         i=0
