@@ -1,16 +1,30 @@
-from func1 import *
+"""
+    Title: Library Management System
+    Author:Ashish Kore
+    Language: Python
+    Requirements:
+    Python version-> 3 or later
+    Python Packages or Modules->    1. sys
+                                    2. getpass
+    Additional Modules->      1. functions.py
+"""
+
+#importing required necessary packages and modules
+from functions import *
 import sys
 import getpass
+
 a=3
 
 while a!=0:
-
+    #Input for password of the librarian
     passw = getpass.getpass("Enter the password:")
+    
+    #checks whether password is correct or not
     if passw =="12345":
         print("**********WELCOME TO THE LIBRARY**********")
         while True:
-
-
+            #Library System Menu
             print('Press 1 : Student related Functionalities')
 
             print('Press 2 : Faculty related Functionalities')
@@ -23,6 +37,7 @@ while a!=0:
 
             if choice == 1:
                 while True:
+                    #Student related functionalities
                     print('*'*38)
 
                     print('Press 1 : Add Student')
@@ -59,6 +74,7 @@ while a!=0:
 
             elif choice == 2:
                 while True:
+                    #Faculty related functionalities
                     print('*'*38)
 
                     print('Press 1 : Add Faculty ')
@@ -95,6 +111,7 @@ while a!=0:
 
             elif choice == 3:
                 while True:
+                    #Books related functionalities
                     print('*'*38)
 
                     print('Press 1 : Add Book to Library')
@@ -128,4 +145,4 @@ while a!=0:
                 sys.exit(0)
 
     a=a-1
-    print(a,'attempts left')
+    print(a,'attempts left')    # warns about the number of attempts left 
